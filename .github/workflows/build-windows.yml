@@ -1,0 +1,37 @@
+name: Build PrismDisplay Windows Host
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET 8
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Build PrismCore.dll
+        shell: cmd
+        run: |
+          for /f "usebackq tokens=*" %%i in (`"%ProgramFiles(x86)%\Microsoft Visual Studio\Installer\vswhere.exe" -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath`) do set "VS_PATH=%%i"
+          if not defined VS_PATH exit /b 1
+          call "%VS_PATH%\VC\Auxiliary\Build\vcvars64.bat"
+          cl /LD /O2 /std:c++20 src\native\PrismCore.cpp d3d11.lib dxgi.lib mfplat.lib mfuuid.lib mfreadwrite.lib user32.lib
+
+      - name: Publish PrismDisplay host
+        shell: pwsh
+        run: |
+          dotnet publish src/app/PrismDisplay.csproj -c Release -r win-x64 --self-contained -o prism_out
+          Copy-Item PrismCore.dll -Destination prism_out/ -ErrorAction Stop
+
+      - name: Upload Windows build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: PrismDisplay-win-x64
+          path: prism_out/

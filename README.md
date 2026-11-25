@@ -50,6 +50,9 @@ copy "%LocalAppData%\Android\Sdk\platform-tools\AdbWinApi.dll" build_out\
 copy "%LocalAppData%\Android\Sdk\platform-tools\AdbWinUsbApi.dll" build_out\
 ```
 
+The automated Windows build is defined in
+[.github/workflows/build-windows.yml](./.github/workflows/build-windows.yml).
+
 The Android files currently include the app module configuration, manifest, and
 activity, but not the root Gradle settings/build files or Gradle wrapper needed
 to build the Android client.
