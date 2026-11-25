@@ -1,0 +1,85 @@
+<Window x:Class="PrismHost.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="PrismDisplay Host" Height="640" Width="960"
+        Background="#0F1117" Foreground="#F3F4F6" WindowStartupLocation="CenterScreen">
+    <Grid Margin="24">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="260"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Column="0" Background="#161922" CornerRadius="12" Padding="20" Margin="0,0,16,0">
+            <StackPanel>
+                <TextBlock Text="PRISMDISPLAY" FontSize="20" FontWeight="Bold" Foreground="#38BDF8"/>
+                <TextBlock Text="Virtual Display &amp; Digitizer Host" FontSize="12" Foreground="#9CA3AF" Margin="0,2,0,20"/>
+
+                <TextBlock Text="CONNECTION STATUS" FontSize="11" FontWeight="SemiBold" Foreground="#6B7280"/>
+                <Border Background="#1F2430" CornerRadius="8" Padding="12" Margin="0,6,0,16">
+                    <StackPanel>
+                        <TextBlock x:Name="TxtConnStatus" Text="Waiting for Device..." FontWeight="SemiBold" Foreground="#FBBF24"/>
+                        <TextBlock x:Name="TxtTransportType" Text="USB Auto-Detect &amp; Wi-Fi Ready" FontSize="11" Foreground="#9CA3AF" Margin="0,4,0,0"/>
+                    </StackPanel>
+                </Border>
+
+                <TextBlock Text="WI-FI PAIRING PIN" FontSize="11" FontWeight="SemiBold" Foreground="#6B7280"/>
+                <Border Background="#1F2430" CornerRadius="8" Padding="12" Margin="0,6,0,20">
+                    <TextBlock x:Name="TxtPairingPin" Text="000000" FontSize="26" FontWeight="Bold" Foreground="#34D399" HorizontalAlignment="Center"/>
+                </Border>
+
+                <TextBlock Text="LIVE TELEMETRY" FontSize="11" FontWeight="SemiBold" Foreground="#6B7280"/>
+                <StackPanel Margin="0,6,0,20">
+                    <TextBlock x:Name="TxtFps" Text="Frame Rate: 0.0 FPS" Margin="0,2"/>
+                    <TextBlock x:Name="TxtBitrate" Text="Throughput: 0.0 Mbps" Margin="0,2"/>
+                </StackPanel>
+
+                <Button x:Name="BtnToggleStream" Content="Start Streaming" Height="42" Background="#0284C7" Foreground="White"
+                        FontWeight="Bold" BorderThickness="0" Click="BtnToggleStream_Click"/>
+            </StackPanel>
+        </Border>
+
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Border Grid.Row="0" Background="#161922" CornerRadius="12" Padding="20" Margin="0,0,0,16">
+                <UniformGrid Columns="2" Rows="2">
+                    <StackPanel Margin="0,0,12,12">
+                        <TextBlock Text="Target Display Output" Foreground="#9CA3AF" FontSize="12" Margin="0,0,0,4"/>
+                        <ComboBox x:Name="CmbDisplay" SelectedIndex="0" Height="32">
+                            <ComboBoxItem Content="Monitor 1 (Primary Mirror)"/>
+                            <ComboBoxItem Content="Monitor 2 (Prism Virtual Extended)"/>
+                        </ComboBox>
+                    </StackPanel>
+                    <StackPanel Margin="12,0,0,12">
+                        <TextBlock Text="Stream Resolution" Foreground="#9CA3AF" FontSize="12" Margin="0,0,0,4"/>
+                        <ComboBox x:Name="CmbResolution" SelectedIndex="0" Height="32">
+                            <ComboBoxItem Content="1920 x 1080 (FHD)"/>
+                            <ComboBoxItem Content="2560 x 1600 (WQXGA)"/>
+                        </ComboBox>
+                    </StackPanel>
+                    <StackPanel Margin="0,0,12,0">
+                        <TextBlock Text="Performance Preset" Foreground="#9CA3AF" FontSize="12" Margin="0,0,0,4"/>
+                        <ComboBox x:Name="CmbPreset" SelectedIndex="1" Height="32">
+                            <ComboBoxItem Content="Performance (120 FPS / Low Latency)"/>
+                            <ComboBoxItem Content="Balanced (60 FPS / 25 Mbps)"/>
+                            <ComboBoxItem Content="Quality (60 FPS / 45 Mbps)"/>
+                        </ComboBox>
+                    </StackPanel>
+                    <StackPanel Margin="12,0,0,0" VerticalAlignment="Bottom">
+                        <CheckBox x:Name="ChkTls" Content="Enforce TLS 1.3 Encryption on Wi-Fi" IsChecked="True" Foreground="#E5E7EB"/>
+                    </StackPanel>
+                </UniformGrid>
+            </Border>
+
+            <Border Grid.Row="1" Background="#161922" CornerRadius="12" Padding="16">
+                <DockPanel>
+                    <TextBlock DockPanel.Dock="Top" Text="DIAGNOSTIC LOGS" FontSize="11" FontWeight="SemiBold" Foreground="#6B7280" Margin="0,0,0,8"/>
+                    <ListBox x:Name="LstLogs" Background="#0F1117" Foreground="#D1D5DB" BorderThickness="0" FontFamily="Consolas" FontSize="12"/>
+                </DockPanel>
+            </Border>
+        </Grid>
+    </Grid>
+</Window>

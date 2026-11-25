@@ -1,0 +1,44 @@
+[Version]
+Signature = "$WINDOWS NT$"
+Class = Display
+ClassGuid = {4d36e968-e325-11ce-bfc1-08002be10318}
+Provider = %ProviderName%
+CatalogFile = PrismVirtualDisplay.cat
+DriverVer = 11/26/2026,1.0.0.0
+PnpLockdown = 1
+
+[DestinationDirs]
+DefaultDestDir = 12
+
+[SourceDisksNames]
+1 = %DiskName%,,,""
+
+[SourceDisksFiles]
+PrismVirtualDisplayDriver.dll = 1
+
+[Manufacturer]
+%ProviderName% = Standard,NTamd64
+
+[Standard.NTamd64]
+%DeviceName% = PrismVirtualDisplay_Device, Root\PrismVirtualDisplay
+
+[PrismVirtualDisplay_Device.NT]
+CopyFiles = PrismVirtualDisplay_CopyFiles
+
+[PrismVirtualDisplay_CopyFiles]
+PrismVirtualDisplayDriver.dll
+
+[PrismVirtualDisplay_Device.NT.Services]
+AddService = PrismVirtualDisplayDriver, 0x00000002, PrismVirtualDisplay_Service_Inst
+
+[PrismVirtualDisplay_Service_Inst]
+DisplayName = %DeviceName%
+ServiceType = 1
+StartType = 3
+ErrorControl = 1
+ServiceBinary = %12%\PrismVirtualDisplayDriver.dll
+
+[Strings]
+ProviderName = "PrismDisplay"
+DiskName = "PrismDisplay Driver Disk"
+DeviceName = "PrismDisplay Virtual Monitor"
