@@ -52,6 +52,10 @@ copy "%LocalAppData%\Android\Sdk\platform-tools\AdbWinUsbApi.dll" build_out\
 
 The automated Windows build is defined in
 [.github/workflows/build-windows.yml](./.github/workflows/build-windows.yml).
+When the workflow finishes, download the `PrismDisplay-win-x64` artifact from
+the Actions tab and extract it on your Windows PC. To use USB ADB tunneling,
+copy `adb.exe`, `AdbWinApi.dll`, and `AdbWinUsbApi.dll` from Android SDK
+platform-tools beside `PrismDisplay.exe`. Then run `PrismDisplay.exe`.
 
 The Android files currently include the app module configuration, manifest, and
 activity, but not the root Gradle settings/build files or Gradle wrapper needed
