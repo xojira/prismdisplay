@@ -1,5 +1,5 @@
 // Compile (x64 Native Tools Command Prompt):
-// cl /LD /O2 /std:c++20 PrismCore.cpp d3d11.lib dxgi.lib mfplat.lib mfuuid.lib mfreadwrite.lib strmiids.lib user32.lib
+// cl /LD /O2 /std:c++20 PrismCore.cpp d3d11.lib dxgi.lib mfplat.lib mfuuid.lib mfreadwrite.lib strmiids.lib ole32.lib user32.lib
 
 #include <windows.h>
 #include <d3d11.h>
