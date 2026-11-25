@@ -28,7 +28,7 @@ The native source is [src/native/PrismCore.cpp](./src/native/PrismCore.cpp).
 Build it from the repository root in an x64 Native Tools Command Prompt:
 
 ```bat
-cl /LD /O2 /std:c++20 src/native/PrismCore.cpp d3d11.lib dxgi.lib mfplat.lib mfuuid.lib mfreadwrite.lib user32.lib
+cl /LD /O2 /std:c++20 src/native/PrismCore.cpp d3d11.lib dxgi.lib mfplat.lib mfuuid.lib mfreadwrite.lib strmiids.lib user32.lib
 ```
 
 ## Windows host packaging
